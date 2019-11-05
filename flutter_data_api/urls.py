@@ -20,6 +20,7 @@ from API import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('<str:url_path>', views.index)
+    path('<str:url_path>', views.index),
+    path('audio/<str:audio_path>', views.audio)
 
 ]
