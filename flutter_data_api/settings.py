@@ -25,7 +25,7 @@ SECRET_KEY = 'jvr7i6qve&%vm=kllhq@8-6j)$c*88ao7=qz(73c=z(y-^h-2*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'API.apps.ApiConfig',
+    # 'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -48,8 +49,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
 ]
-
+# CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'flutter_data_api.urls'
 
 TEMPLATES = [
