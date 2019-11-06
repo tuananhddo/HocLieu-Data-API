@@ -17,10 +17,17 @@ from django.contrib import admin
 from django.urls import path
 
 from API import views
+from API.REST_Controller.BookController import BookController
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('<str:url_path>', views.index),
-    path('audio/<str:audio_path>', views.audio)
+    path('image/<path:url_path>', views.image),
+    path('audio/<path:audio_path>', views.audio),
+    path('book/',BookController.as_view()),
+    path('unit/<int:bookId>',views.getUnitByBook),
+    path('word/<int:unitId>', views.getWordByUnit),
+
+    #Test
+    path('book/id', views.getBookById),
 
 ]
