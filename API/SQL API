@@ -1,0 +1,5 @@
+Word.objects.filter(unit__book__book_name='English 1').count()
+
+
+words = User.word.all() #all learned word of user
+count_learned_word_of_unit = words.object.filter(unit= id).count()
