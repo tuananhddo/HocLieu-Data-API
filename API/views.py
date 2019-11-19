@@ -67,7 +67,7 @@ def create_or_update_user(request,email):
 def getLearnedWordByUser(request,email):
     try:
         user = AppUser.objects.get(email = email)
-        data = LearnedWord.objects.filter(user=user)
+        data = LearnedWord.objects.filter(user=user).values()
         jsonData = json.dumps(list(data))
         return HttpResponse(jsonData, content_type='application/json')
     except ObjectDoesNotExist:
