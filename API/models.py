@@ -27,7 +27,6 @@ class LearnedWord(models.Model):
         Word,
         on_delete=models.CASCADE,
         primary_key=True,
-        # null=True
     )
     listening = models.BooleanField()
     speaking = models.BooleanField()

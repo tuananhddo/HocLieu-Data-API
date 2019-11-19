@@ -41,8 +41,8 @@ def getWordByUnit(request,unitId):
     return HttpResponse(jsonData, content_type='application/json')
 
 
-def getBookById(request):
-    data = Book.objects.filter(id=2).values()
+def getWordById(request,wordId):
+    data = Word.objects.filter(id=wordId).values()
     jsonData = json.dumps(list(data)[0])
     return HttpResponse(jsonData, content_type='application/json')
 def getUserInfoByEmail(request,email):
@@ -68,14 +68,14 @@ def getLearnedWordByUser(request,email):
     try:
         user = AppUser.objects.get(email = email)
         data = LearnedWord.objects.filter(user=user)
-
-        json_serializer = jsx.Serializer()
-        json_serialized = json_serializer.serialize(data)
-        return HttpResponse(json_serialized, content_type='application/json')
-
-        # jsonData = json.dumps(list(data))
-        # return HttpResponse(jsonData, content_type='application/json')
+        jsonData = json.dumps(list(data))
+        return HttpResponse(jsonData, content_type='application/json')
     except ObjectDoesNotExist:
         print("Either the entry or blog doesn't exist.")
         raise Http404("No Data matches the given query.")
 
+
+def getBookById(request):
+    data = Book.objects.filter(id=2).values()
+    jsonData = json.dumps(list(data)[0])
+    return HttpResponse(jsonData, content_type='application/json')

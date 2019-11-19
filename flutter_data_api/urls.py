@@ -27,6 +27,8 @@ urlpatterns = [
     path('unit/<int:bookId>',views.getUnitByBook),
     path('word/<int:unitId>', views.getWordByUnit),
 
+    path('word/id/<int:wordId>', views.getWordById),
+
     path('user/info/<str:email>',views.getUserInfoByEmail),
     path('user/<str:email>',views.create_or_update_user),
 
