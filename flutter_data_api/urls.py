@@ -27,6 +27,11 @@ urlpatterns = [
     path('unit/<int:bookId>',views.getUnitByBook),
     path('word/<int:unitId>', views.getWordByUnit),
 
+    path('user/info/<str:email>',views.getUserInfoByEmail),
+    path('user/<str:email>',views.create_or_update_user),
+
+    # path('user/learned',views.getLearnedWordByUser),
+    path('user/learned/<str:email>',views.getLearnedWordByUser),
     #Test
     path('book/id', views.getBookById),
 

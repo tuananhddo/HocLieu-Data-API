@@ -8,9 +8,9 @@ https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/
 """
 
 import os
-
+import django
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flutter_data_api.settings')
-
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flutter_data_api.settings')
+os.environ['DJANGO_SETTINGS_MODULE'] = 'flutter_data_api.settings'
 application = get_wsgi_application()

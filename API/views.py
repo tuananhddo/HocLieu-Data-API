@@ -1,13 +1,15 @@
 import json
 import os
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
+from django.core.serializers import json as jsx
 
 # Create your views here.
-from django.http import HttpResponse
-from PIL import Image
-
-from API.models import Book, Unit, Word
+from django.http import HttpResponse, Http404
+# from PIL import Image
+import Image
+from API.models import Book, Unit, Word,LearnedWord,AppUser
 
 size = 250, 250
 # relative_path = "HocLieuAPI/"
@@ -43,3 +45,37 @@ def getBookById(request):
     data = Book.objects.filter(id=2).values()
     jsonData = json.dumps(list(data)[0])
     return HttpResponse(jsonData, content_type='application/json')
+def getUserInfoByEmail(request,email):
+    data = AppUser.objects.filter(email = email).values();
+    if data.exists():
+        jsonData = json.dumps(list(data)[0])
+        return HttpResponse(jsonData, content_type='application/json')
+    raise Http404("No Data matches the given query.")
+
+#TODO:Secure Undone POST
+def create_or_update_user(request,email):
+    if AppUser.objects.filter(email=email).exists():    #Update
+        data = AppUser.objects.all().values();
+        jsonData = json.dumps(list(data))
+        return HttpResponse(jsonData, content_type='application/json')
+    else:   #Create
+        newUser = AppUser(email = email)
+        newUser.save()
+        data = AppUser.objects.all().values();
+        jsonData = json.dumps(list(data))
+        return HttpResponse(jsonData, content_type='application/json')
+def getLearnedWordByUser(request,email):
+    try:
+        user = AppUser.objects.get(email = email)
+        data = LearnedWord.objects.filter(user=user)
+
+        json_serializer = jsx.Serializer()
+        json_serialized = json_serializer.serialize(data)
+        return HttpResponse(json_serialized, content_type='application/json')
+
+        # jsonData = json.dumps(list(data))
+        # return HttpResponse(jsonData, content_type='application/json')
+    except ObjectDoesNotExist:
+        print("Either the entry or blog doesn't exist.")
+        raise Http404("No Data matches the given query.")
+
