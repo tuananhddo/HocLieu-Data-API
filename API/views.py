@@ -7,9 +7,10 @@ from django.core.serializers import json as jsx
 
 # Create your views here.
 from django.http import HttpResponse, Http404
-# from PIL import Image
-import Image
+from PIL import Image # In Lap
+# import Image  In PC
 from API.models import Book, Unit, Word,LearnedWord,AppUser
+from django.core import serializers
 
 size = 250, 250
 # relative_path = "HocLieuAPI/"
@@ -32,8 +33,9 @@ def audio(request,audio_path):
     except IOError:
         return HttpResponse('This Audio Not Exist')
 def getUnitByBook(request,bookId):
-    data = Unit.objects.filter(book_id=bookId).values('id','unit_number','unit_name')
-    jsonData = json.dumps(list(data))
+    # data = Unit.objects.filter(book_id=bookId).values()
+    # jsonData = json.dumps(list(data))
+    jsonData = serializers.serialize('json', Unit.objects.filter(book_id=bookId).only('unit_name'),use_natural_foreign_keys=True)
     return HttpResponse(jsonData, content_type='application/json')
 def getWordByUnit(request,unitId):
     data = Word.objects.filter(unit_id=unitId).values('id','name','translated_name','description','image','sound')
