@@ -88,7 +88,11 @@ def update_learner_word(request):
             if AppUser.objects.filter(email=email).exists():
                 user = AppUser.objects.get(email=email)
                 for data in updateData:
-                    print(data)
+                    wordId = data['learned_word_id']
+                    listening = data['listening']
+                    speaking = data['speaking']
+                    reading = data['reading']
+                    writing = data['writing']
 
 
                 return HttpResponse(status=200)
