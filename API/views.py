@@ -84,9 +84,11 @@ def update_learner_word(request):
             body_unicode = request.body.decode('utf-8')
             body = json.loads(body_unicode)
             email = body['email']
-            f = body['updateData']
+            updateData = body['updateData']
             if AppUser.objects.filter(email=email).exists():
-                userId = AppUser.objects.get(email=email).id
+                user = AppUser.objects.get(email=email)
+                for data in updateData:
+                    print(data)
 
 
                 return HttpResponse(status=200)
