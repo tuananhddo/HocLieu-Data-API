@@ -1,0 +1,20 @@
+*Fake* Update Data
+{
+	"email":"abc@gmail.com",
+	"updateData": [
+		{
+			"learned_word_id":1,
+			"listening":true,
+			"speaking":true,
+			"reading":true,
+			"writing":true
+		},
+		{
+			"learned_word_id":2,
+			"listening":true,
+			"speaking":true,
+			"reading":true,
+			"writing":true
+		}
+	]
+}
