@@ -7,10 +7,10 @@ from django.core.serializers import json as jsx
 
 # Create your views here.
 from django.http import HttpResponse, Http404
-from PIL import Image # In Lap
+# from PIL import Image # In Lap
 from django.views.decorators.csrf import csrf_exempt
 
-# import Image  # In PC
+import PIL.Image  # In PC
 from API.models import Book, Unit, Word, LearnedWord, AppUser
 from django.core import serializers
 
@@ -21,7 +21,7 @@ relative_path = "API/"
 def image(request, url_path):
     response = HttpResponse(content_type="image/png")
     try:
-        img = Image.open(url_path)
+        img = PIL.Image.open(url_path)
         img.thumbnail(size)
         img.save(response, "JPEG")
     except IOError:
