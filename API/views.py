@@ -7,10 +7,10 @@ from django.core.serializers import json as jsx
 
 # Create your views here.
 from django.http import HttpResponse, Http404
-# from PIL import Image # In Lap
+from PIL import Image # In Lap
 from django.views.decorators.csrf import csrf_exempt
 
-import Image  # In PC
+# import Image  # In PC
 from API.models import Book, Unit, Word, LearnedWord, AppUser
 from django.core import serializers
 
