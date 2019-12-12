@@ -18,6 +18,10 @@ size = 250, 250
 relative_path = "API/"
 
 
+def index(request):
+    return HttpResponse('Hello World')
+
+
 def image(request, url_path):
     response = HttpResponse(content_type="image/png")
     try:

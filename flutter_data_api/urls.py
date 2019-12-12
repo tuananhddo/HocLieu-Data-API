@@ -21,6 +21,7 @@ from API.REST_Controller.BookController import BookController
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index),
     path('image/<path:url_path>', views.image),
     path('audio/<path:audio_path>', views.audio),
     path('book/',BookController.as_view()),
