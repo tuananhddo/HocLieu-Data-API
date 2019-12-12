@@ -89,13 +89,12 @@ def update_learner_word(request):
                 user = AppUser.objects.get(email=email)
                 for data in updateData:
                     wordId = data['learned_word_id']
+                    learnedWord = LearnedWord.objects.get()
                     listening = data['listening']
                     speaking = data['speaking']
                     reading = data['reading']
                     writing = data['writing']
-
-
-                return HttpResponse(status=200)
+            return HttpResponse(status=200)
         except:
             raise Http404("Not Found")
     else:
