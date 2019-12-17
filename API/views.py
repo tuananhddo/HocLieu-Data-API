@@ -19,7 +19,7 @@ relative_path = "API/"
 
 
 def index(request):
-    return HttpResponse('Hello World')
+    return HttpResponse('This Is API For HocLieu')
 
 
 def image(request, url_path):
