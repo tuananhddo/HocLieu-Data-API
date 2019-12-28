@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jvr7i6qve&%vm=kllhq@8-6j)$c*88ao7=qz(73c=z(y-^h-2*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,6 +85,14 @@ DATABASES = {
             'timeout': 100,
         }
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'flutter',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
+    #     'PORT': '3306',
+    # }
 }
 
 
