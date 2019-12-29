@@ -98,8 +98,10 @@ def update_learner_word(request):
                     speaking = data['speaking']
                     reading = data['reading']
                     writing = data['writing']
+                    word = Word.objects.get(id=wordId)
+
                     try:
-                        learnedWord = LearnedWord.objects.get(word_id=wordId,user__email=email)
+                        learnedWord = LearnedWord.objects.filter(user=user,word=word)[:1].get()
                         learnedWord.listening = listening if listening != "" else learnedWord.listening
                         learnedWord.speaking = speaking if speaking != "" else learnedWord.speaking
                         learnedWord.reading = reading if reading != "" else learnedWord.reading
@@ -108,7 +110,6 @@ def update_learner_word(request):
                         return HttpResponse(status=200)
 
                     except ObjectDoesNotExist:
-                        word = Word.objects.get(id = wordId)
                         newLearnedWord = LearnedWord(word=word,user=user)
                         newLearnedWord.listening = listening if listening != "" else False
                         newLearnedWord.speaking = speaking if speaking != "" else False

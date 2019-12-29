@@ -31,10 +31,9 @@ class LearnedWord(models.Model):
         AppUser,
         on_delete=models.CASCADE,
     )
-    word = models.OneToOneField(
+    word = models.ForeignKey(
         Word,
         on_delete=models.CASCADE,
-        primary_key=True,
     )
     listening = models.BooleanField()
     speaking = models.BooleanField()

@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
-
+import dj_database_url       # Place this line preferably at the top
+from decouple import config  # Place this line preferably at the top
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -87,6 +88,14 @@ DATABASES = {
         }
     }
     # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'myproject',
+    #     'USER': 'myprojectuser',
+    #     'PASSWORD': 'password',
+    #     'HOST': 'localhost',
+    #     'PORT': '',
+    # }
+    # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'flutter',
     #     'USER': 'root',
@@ -95,7 +104,11 @@ DATABASES = {
     #     'PORT': '3306',
     # }
 }
-
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL')
+#     )
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
