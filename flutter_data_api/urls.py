@@ -32,7 +32,7 @@ urlpatterns = [
 
     path('user/info/<str:email>',views.getUserInfoByEmail),
     path('user/<str:email>',views.create_user),
-    path('user/learned/update',views.update_learner_word),
+    path('user/learned/update',views.update_learner_word,name='updateUser'),
 
     # path('user/learned',views.getLearnedWordByUser),
     path('user/learned/<str:email>',views.getLearnedWordByUser),

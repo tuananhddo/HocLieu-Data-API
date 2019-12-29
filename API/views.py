@@ -83,6 +83,7 @@ def create_user(request, email):
 
 @csrf_exempt
 def update_learner_word(request):
+
     if request.method == 'POST':
         try:
             body_unicode = request.body.decode('utf-8')
@@ -92,13 +93,31 @@ def update_learner_word(request):
             if AppUser.objects.filter(email=email).exists():
                 user = AppUser.objects.get(email=email)
                 for data in updateData:
-                    wordId = data['learned_word_id']
-                    learnedWord = LearnedWord.objects.get()
+                    wordId = data['word_id']
                     listening = data['listening']
                     speaking = data['speaking']
                     reading = data['reading']
                     writing = data['writing']
-            return HttpResponse(status=200)
+                    try:
+                        learnedWord = LearnedWord.objects.get(word_id=wordId,user__email=email)
+                        learnedWord.listening = listening if listening != "" else learnedWord.listening
+                        learnedWord.speaking = speaking if speaking != "" else learnedWord.speaking
+                        learnedWord.reading = reading if reading != "" else learnedWord.reading
+                        learnedWord.writing = writing if writing != "" else learnedWord.writing
+                        learnedWord.save()
+                        return HttpResponse(status=200)
+
+                    except ObjectDoesNotExist:
+                        word = Word.objects.get(id = wordId)
+                        newLearnedWord = LearnedWord(word=word,user=user)
+                        newLearnedWord.listening = listening if listening != "" else False
+                        newLearnedWord.speaking = speaking if speaking != "" else False
+                        newLearnedWord.reading = reading if reading != "" else False
+                        newLearnedWord.writing = writing if writing != "" else False
+                        newLearnedWord.save()
+                        return HttpResponse(status=200)
+
+            raise Http404("Not Found")
         except:
             raise Http404("Not Found")
     else:
